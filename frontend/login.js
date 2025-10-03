@@ -1,13 +1,11 @@
-document.getElementById('loginBtn').addEventListener('click', async () => {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+document.getElementById('loginBtn').addEventListener('click', () => {
+    const username = document.getElementById('username').value.trim();
 
-    try {
-        const res = await login(username, password);
-        localStorage.setItem('token', res.token);
-        localStorage.setItem('userId', res.userId);
-        window.location.href = "index.html";
-    } catch(e) {
-        alert("erro ao logar: " + e.message);
+    if (!username) {
+        alert("Digite um nome para entrar!");
     }
+    
+    localStorage.setItem('username', username);
+
+    window.location.href = "index.html";
 });

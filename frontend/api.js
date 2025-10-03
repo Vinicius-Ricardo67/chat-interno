@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000/api'; // ajuste conforme necessário
+const API_URL = 'http://localhost:1717/api';
 
 async function login(username, senha) {
   const res = await fetch(`${API_URL}/login`, {
