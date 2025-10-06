@@ -21,3 +21,4 @@ async function connectDB() {
 }
 
 module.exports = { sql, connectDB };
+   

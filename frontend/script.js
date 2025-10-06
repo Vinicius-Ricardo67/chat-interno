@@ -3,7 +3,7 @@ if (!username) {
   window.location.href = 'login.html'
 }
 
-const socket = io('http://localhost:1717', {
+const socket = io('http://localhost:3000', {
   query: { username }
 });
 
