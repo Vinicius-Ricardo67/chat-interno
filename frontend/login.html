@@ -1,23 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Cadastro</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadastro - Chat</title>
+  <link rel="stylesheet" href="login.css" />
 </head>
 <body>
-    <div class="login-container">
-    
-    <h2>Cadastre para acessar o Chat</h2>
-    <input type="text" id="nome" placeholder="Digite seu nome" required/>
-    <input type="email" id="email" placeholder="Coloque seu E-mail" required/>
-    <input type="password" id="password" placeholder="Digite sua senha" required/>
-    <input type="file" id="imagemPerfil" accept="image/png, image/jpeg" />
-    <button id="cadastroBtn">Entrar</button>
+  <div class="cadastro-container">
+    <form id="cadastroForm" class="cadastro-form">
+      <div class="linha-inputs">
+        <div class="input-box">
+          <label for="nome">Nome</label>
+          <input type="text" id="nome" placeholder="Digite seu nome" required />
+        </div>
 
-    <p>Já possui uma conta? <span id="irParaLogin" style="cursor: pointer; color: #6865f2;">Entre aqui!</span></p>
+        <div class="input-box">
+          <label for="senha">Senha</label>
+          <input type="password" id="senha" placeholder="Digite sua senha" required />
+        </div>
+      </div>
+
+      <div class="input-box">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Digite seu email" required />
+      </div>
+
+      <button id="enviarBtn" type="submit">Cadastrar</button>
+    </form>
+
+    <div class="preview-container">
+      <img id="previewImg" src="/frontend/img/default-avatar.png" alt="Preview da imagem" />
+      <label for="imgInput">Escolher imagem</label>
+      <input type="file" id="imgInput" accept=".png, .jpg, .jpeg" hidden />
     </div>
+  </div>
 
-    <script src="login.js"></script>
+  <script src="login.js"></script>
 </body>
 </html>

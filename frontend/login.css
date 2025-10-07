@@ -1,0 +1,141 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Roboto, Inter, system-ui, sans-serif;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #18191c; /* fundo escuro estilo Discord */
+  color: #e4e6eb;
+}
+
+/* === CONTAINER PRINCIPAL === */
+.cadastro-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #2c2f33;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
+  width: 700px;
+  max-width: 90%;
+  gap: 2rem;
+}
+
+/* === FORMULÁRIO === */
+.cadastro-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.linha-inputs {
+  display: flex;
+  gap: 1rem;
+}
+
+.input-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-box label {
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+  color: #b9bbbe;
+}
+
+.input-box input {
+  background: #40444b;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: #fff;
+  font-size: 0.95rem;
+  outline: none;
+  transition: background 0.2s;
+}
+
+.input-box input:focus {
+  background: #4a4e54;
+}
+
+/* === BOTÃO DE ENVIAR === */
+button#enviarBtn {
+  background: #5865f2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button#enviarBtn:hover {
+  background: #4752c4;
+}
+
+/* === SEÇÃO DE IMAGEM === */
+.preview-container {
+  width: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background: #23272a;
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.preview-container img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #5865f2;
+  background-color: #2c2f33;
+}
+
+.preview-container label {
+  background: #5865f2;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+
+.preview-container label:hover {
+  background: #4752c4;
+}
+
+/* === RESPONSIVIDADE === */
+@media (max-width: 700px) {
+  .cadastro-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .preview-container {
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .preview-container img {
+    width: 80px;
+    height: 80px;
+  }
+}
