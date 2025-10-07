@@ -1,141 +1,116 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', Roboto, Inter, system-ui, sans-serif;
-}
-
 body {
-  height: 100vh;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: #0e1621;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #18191c; /* fundo escuro estilo Discord */
-  color: #e4e6eb;
+  height: 100vh;
+  color: #fff;
 }
 
-/* === CONTAINER PRINCIPAL === */
-.cadastro-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #2c2f33;
-  padding: 2rem;
+.login-container {
+  background: #1e293b;
+  padding: 40px 30px;
   border-radius: 16px;
-  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
-  width: 700px;
-  max-width: 90%;
-  gap: 2rem;
-}
-
-/* === FORMULÁRIO === */
-.cadastro-form {
-  flex: 1;
+  width: 400px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.4);
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
-}
-
-.linha-inputs {
-  display: flex;
-  gap: 1rem;
-}
-
-.input-box {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.input-box label {
-  font-size: 0.9rem;
-  margin-bottom: 0.4rem;
-  color: #b9bbbe;
-}
-
-.input-box input {
-  background: #40444b;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 14px;
-  color: #fff;
-  font-size: 0.95rem;
-  outline: none;
-  transition: background 0.2s;
-}
-
-.input-box input:focus {
-  background: #4a4e54;
-}
-
-/* === BOTÃO DE ENVIAR === */
-button#enviarBtn {
-  background: #5865f2;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 10px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-button#enviarBtn:hover {
-  background: #4752c4;
-}
-
-/* === SEÇÃO DE IMAGEM === */
-.preview-container {
-  width: 180px;
-  display: flex;
-  flex-direction: column;
+  gap: 20px;
   align-items: center;
-  gap: 1rem;
-  background: #23272a;
-  border-radius: 12px;
-  padding: 1rem;
 }
 
-.preview-container img {
-  width: 120px;
-  height: 120px;
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.profile-section {
+  position: relative;
+  width: 110px;
+  height: 110px;
+}
+
+.profile-section input[type="file"] {
+  display: none;
+}
+
+.avatar-label {
+  position: relative;
+  display: inline-block;
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #5865f2;
-  background-color: #2c2f33;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s;
+  border: 3px solid #2563eb;
 }
 
-.preview-container label {
-  background: #5865f2;
+.avatar-label:hover {
+  transform: scale(1.05);
+}
+
+.avatar-label img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-label .overlay {
+  position: absolute;
+  bottom: 0;
+  background: rgba(0,0,0,0.6);
   color: #fff;
-  padding: 8px 12px;
-  border-radius: 6px;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  padding: 5px 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.avatar-label:hover .overlay {
+  opacity: 1;
+}
+
+.input-row {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.input-row input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #0f172a;
+  color: #fff;
+}
+
+input[type="email"], #senha, #username {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #0f172a;
+  color: #fff;
+  width: 100%;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #2563eb;
+  color: #fff;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-weight: bold;
   transition: background 0.2s;
 }
 
-.preview-container label:hover {
-  background: #4752c4;
-}
-
-/* === RESPONSIVIDADE === */
-@media (max-width: 700px) {
-  .cadastro-container {
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-    padding: 1.5rem;
-  }
-
-  .preview-container {
-    width: 100%;
-    flex-direction: row;
-    justify-content: center;
-  }
-
-  .preview-container img {
-    width: 80px;
-    height: 80px;
-  }
+button:hover {
+  background: #1d4ed8;
 }

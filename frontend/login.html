@@ -1,39 +1,28 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cadastro - Chat</title>
-  <link rel="stylesheet" href="login.css" />
+  <meta charset="UTF-8">
+  <title>Cadastro/Login</title>
+  <link rel="stylesheet" href="login.css">
 </head>
 <body>
-  <div class="cadastro-container">
-    <form id="cadastroForm" class="cadastro-form">
-      <div class="linha-inputs">
-        <div class="input-box">
-          <label for="nome">Nome</label>
-          <input type="text" id="nome" placeholder="Digite seu nome" required />
-        </div>
+  <div class="login-container">
+    <h2>Entre no chat</h2>
 
-        <div class="input-box">
-          <label for="senha">Senha</label>
-          <input type="password" id="senha" placeholder="Digite sua senha" required />
-        </div>
-      </div>
-
-      <div class="input-box">
-        <label for="email">Email</label>
-        <input type="email" id="email" placeholder="Digite seu email" required />
-      </div>
-
-      <button id="enviarBtn" type="submit">Cadastrar</button>
-    </form>
-
-    <div class="preview-container">
-      <img id="previewImg" src="/frontend/img/default-avatar.png" alt="Preview da imagem" />
-      <label for="imgInput">Escolher imagem</label>
-      <input type="file" id="imgInput" accept=".png, .jpg, .jpeg" hidden />
+    <div class="profile-section">
+      <label for="imagem" class="avatar-label">
+        <img id="previewImg" src="/frontend/img/default-avatar.png" alt="Pré-visualização">
+        <div class="overlay">Alterar</div>
+      </label>
+      <input type="file" id="imagem" accept="image/png, image/jpeg">
     </div>
+
+    <div class="input-row">
+      <input type="text" id="username" placeholder="Nome">
+      <input type="password" id="senha" placeholder="Senha">
+    </div>
+    <input type="email" id="email" placeholder="Email">
+    <button id="loginBtn">Entrar</button>
   </div>
 
   <script src="login.js"></script>

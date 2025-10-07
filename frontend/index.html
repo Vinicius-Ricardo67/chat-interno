@@ -1,36 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Chat</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Chat</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="chat-container">
-        <aside class="user-list">
-            <h3>Usuários</h3>
-            <ul id="usuariosOnline"></ul>
-        </aside>
+  <div class="chat-container">
+    <aside class="user-list">
+      <h3>Usuários</h3>
+      <ul id="usuariosOnline"></ul>
+    </aside>
 
-        <main class="chat">
-            <div id="chatHeader">Selecione um usuário</div>
+    <main class="chat">
+      <header id="chatHeader">Selecione um usuário</header>
 
-            <div class="user-select">
-                <input type="text" id="destinatarioInput" placeholder="Digite o nome do usuário" />
-                <button id="abrirChatBtn">Abrir chat</button>
-            </div>
+      <div class="user-select">
+        <input type="text" id="destinatarioInput" placeholder="Digite o nome do usuário...">
+        <button id="abrirChatBtn">Abrir Chat</button>
+      </div>
 
-            <div id="chatMensagens" class="mensagens"></div>
+      <div id="chatMensagens" class="mensagens"></div>
 
-            <div class="chat-input">
-                <input type="text" id="mensagemInput" placeholder="Digite uma mensagem..." />
-                <button id="enviarBtn">Enviar</button>
-            </div>
-        </main>
-    </div>
+      <div class="chat-input">
+        <input type="text" id="mensagemInput" placeholder="Digite uma mensagem...">
+        <button id="enviarBtn">Enviar</button>
+      </div>
+    </main>
+  </div>
 
-    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
-    <script src="api.js"></script>
-    <script src="script.js"></script>
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

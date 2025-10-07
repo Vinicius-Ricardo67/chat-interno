@@ -1,50 +1,42 @@
-const imgInput = document.getElementById('imgInput');
+const usernameInput = document.getElementById('username');
+const senhaInput = document.getElementById('senha');
+const emailInput = document.getElementById('email');
+const loginBtn = document.getElementById('loginBtn');
+const imagemInput = document.getElementById('imagem');
 const previewImg = document.getElementById('previewImg');
-const form = document.getElementById('cadastroForm');
 
-imgInput.addEventListener('change', () => {
-  const file = imgInput.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = e => previewImg.src = e.target.result;
-    reader.readAsDataURL(file);
-  }
+imagemInput.addEventListener('change', () => {
+  const file = imagemInput.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => previewImg.src = e.target.result;
+  reader.readAsDataURL(file);
 });
 
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
+loginBtn.addEventListener('click', () => {
+  const username = usernameInput.value.trim();
+  const senha = senhaInput.value.trim();
+  const email = emailInput.value.trim();
+  const imagem = previewImg.src;
 
-  const nome = document.getElementById('nome').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const senha = document.getElementById('senha').value.trim();
-  const imagem = imgInput.files[0] || null;
-
-  if (!nome || !email || !senha) {
-    alert('Preencha todos os campos obrigatórios.');
+  if (!username || !senha || !email) {
+    alert('Preencha todos os campos obrigatórios!');
     return;
   }
 
-  const formData = new FormData();
-  formData.append('nome', nome);
-  formData.append('email', email);
-  formData.append('senha', senha);
-  if (imagem) formData.append('imagem', imagem);
-
-  try {
-    const res = await fetch('http://localhost:3000', {
-      method: 'POST',
-      body: formData
-    });
-
-    const data = await res.json();
-    if (res.ok) {
-      alert('Cadastro realizado com sucesso!');
+  fetch('http://localhost:3000/api/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username, senha, email, imagem })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      localStorage.setItem('username', username);
       window.location.href = 'index.html';
     } else {
-      alert(`Erro: ${data.message || 'Falha ao cadastrar'}`);
+      alert('Erro: ' + data.message);
     }
-  } catch (err) {
-    console.error(err);
-    alert('Erro ao conectar ao servidor.');
-  }
+  })
+  .catch(err => alert('Erro: ' + err.message));
 });
