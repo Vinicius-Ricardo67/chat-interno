@@ -96,7 +96,7 @@ input[type="email"], #senha, #username {
   border: none;
   background: #0f172a;
   color: #fff;
-  width: 100%;
+  width: 95%;
 }
 
 button {

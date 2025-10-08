@@ -24,19 +24,12 @@ loginBtn.addEventListener('click', () => {
     return;
   }
 
-  fetch('http://localhost:3000/api/login', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, senha, email, imagem })
-  })
-  .then(res => res.json())
-  .then(data => {
-    if (data.success) {
-      localStorage.setItem('username', username);
-      window.location.href = 'index.html';
-    } else {
-      alert('Erro: ' + data.message);
-    }
-  })
-  .catch(err => alert('Erro: ' + err.message));
+  localStorage.setItem('username', username);
+  localStorage.setItem('email', email);
+  localStorage.setItem('imagem', imagem);
+
+  window.location.href = 'index.html'
+  
 });
+
+
