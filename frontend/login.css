@@ -1,0 +1,116 @@
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: #0e1621;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #fff;
+}
+
+.login-container {
+  background: #1e293b;
+  padding: 40px 30px;
+  border-radius: 16px;
+  width: 400px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.profile-section {
+  position: relative;
+  width: 110px;
+  height: 110px;
+}
+
+.profile-section input[type="file"] {
+  display: none;
+}
+
+.avatar-label {
+  position: relative;
+  display: inline-block;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s;
+  border: 3px solid #2563eb;
+}
+
+.avatar-label:hover {
+  transform: scale(1.05);
+}
+
+.avatar-label img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-label .overlay {
+  position: absolute;
+  bottom: 0;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  padding: 5px 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.avatar-label:hover .overlay {
+  opacity: 1;
+}
+
+.input-row {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.input-row input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #0f172a;
+  color: #fff;
+}
+
+input[type="email"], #senha, #username {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #0f172a;
+  color: #fff;
+  width: 100%;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #2563eb;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: #1d4ed8;
+}

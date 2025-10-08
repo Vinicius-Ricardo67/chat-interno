@@ -1,23 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Cadastro</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Cadastro/Login</title>
+  <link rel="stylesheet" href="login.css">
 </head>
 <body>
-    <div class="login-container">
-    
-    <h2>Cadastre para acessar o Chat</h2>
-    <input type="text" id="nome" placeholder="Digite seu nome" required/>
-    <input type="email" id="email" placeholder="Coloque seu E-mail" required/>
-    <input type="password" id="password" placeholder="Digite sua senha" required/>
-    <input type="file" id="imagemPerfil" accept="image/png, image/jpeg" />
-    <button id="cadastroBtn">Entrar</button>
+  <div class="login-container">
+    <h2>Entre no chat</h2>
 
-    <p>Já possui uma conta? <span id="irParaLogin" style="cursor: pointer; color: #6865f2;">Entre aqui!</span></p>
+    <div class="profile-section">
+      <label for="imagem" class="avatar-label">
+        <img id="previewImg" src="/frontend/img/default-avatar.png" alt="Pré-visualização">
+        <div class="overlay">Alterar</div>
+      </label>
+      <input type="file" id="imagem" accept="image/png, image/jpeg">
     </div>
 
-    <script src="login.js"></script>
+    <div class="input-row">
+      <input type="text" id="username" placeholder="Nome">
+      <input type="password" id="senha" placeholder="Senha">
+    </div>
+    <input type="email" id="email" placeholder="Email">
+    <button id="loginBtn">Entrar</button>
+  </div>
+
+  <script src="login.js"></script>
 </body>
 </html>
