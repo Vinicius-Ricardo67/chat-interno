@@ -1,0 +1,19 @@
+{
+"users":[
+    {
+        "nome": "davi",
+        "email": "email@davi",
+        "senha": 123 
+    },
+    {
+        "nome":"vini",
+        "email": "email@vini",
+        "senha": 123
+    },
+    {
+        "nome":"vagner",
+        "email": "email@vagner",
+        "senha": 123
+    }
+]
+}

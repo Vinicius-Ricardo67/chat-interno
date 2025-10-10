@@ -10,6 +10,8 @@ const server = http.createServer(app);
 app.use(cors());
 app.use(express.json());
 
+console.log()
+
 // --- Socket.IO setup ---
 const io = new Server(server, {
   cors: {
