@@ -1,52 +1,33 @@
 const usernameInput = document.getElementById('username');
 const senhaInput = document.getElementById('senha');
 const emailInput = document.getElementById('email');
-const loginBtn = document.getElementById('loginBtn');
 const imagemInput = document.getElementById('imagem');
 const previewImg = document.getElementById('previewImg');
+const loginBtn = document.getElementById('loginBtn');
 
 imagemInput.addEventListener('change', () => {
   const file = imagemInput.files[0];
   if (!file) return;
   const reader = new FileReader();
-  reader.onload = (e) => previewImg.src = e.target.result;
+  reader.onload = e => previewImg.src = e.target.result;
   reader.readAsDataURL(file);
 });
 
-loginBtn.addEventListener('click', async () => {
+loginBtn.addEventListener('click', () => {
   const username = usernameInput.value.trim();
   const senha = senhaInput.value.trim();
   const email = emailInput.value.trim();
-  const imagem = previewImg.src;
+  const imagem = previewImg.src || 'default.png';
 
   if (!username || !senha || !email) {
     alert('Preencha todos os campos obrigatórios!');
     return;
   }
 
-  try {
+  // Salva os dados no localStorage
   localStorage.setItem('username', username);
   localStorage.setItem('email', email);
   localStorage.setItem('imagem', imagem);
 
-  window.location.href = 'index.html'
-  } catch (err) {
-    alert(err.message)
-  }
-});
-  fetch('http://localhost:3000/cadastrar', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, senha, email, imagem })
-  })
-  .then(res => res.json())
-  .then(data => {
-    if (data.success) {
-      localStorage.setItem('username', username);
-      window.location.href = 'index.html';
-    } else {
-      alert('Erro: ' + data.message);
-    }
-  })
-  .catch(err => alert('Erro: ' + err.message));
+  window.location.href = 'index.html';
 });

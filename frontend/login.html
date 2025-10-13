@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <title>Cadastro/Login</title>
@@ -7,24 +7,20 @@
 </head>
 <body>
   <div class="login-container">
-    <h2>Entre no chat</h2>
-
-    <div class="profile-section">
-      <label for="imagem" class="avatar-label">
-        <img id="previewImg" src="/frontend/img/default-avatar.png" alt="Pré-visualização">
-        <div class="overlay">Alterar</div>
-      </label>
-      <input type="file" id="imagem" accept="image/png, image/jpeg">
-    </div>
-
-    <div class="input-row">
-      <input type="text" id="username" placeholder="Nome">
+    <h2>Cadastro/Login</h2>
+    <div class="row">
+      <input type="text" id="username" placeholder="Nome de usuário">
       <input type="password" id="senha" placeholder="Senha">
     </div>
-    <input type="email" id="email" placeholder="Email">
+    <input type="email" id="email" placeholder="E-mail">
+    
+    <div class="image-upload">
+      <input type="file" id="imagem" accept="image/png, image/jpeg">
+      <img id="previewImg" src="default.png" alt="Pré-visualização">
+    </div>
+
     <button id="loginBtn">Entrar</button>
   </div>
-
   <script src="login.js"></script>
 </body>
 </html>
