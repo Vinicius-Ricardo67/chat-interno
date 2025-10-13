@@ -10,7 +10,8 @@ const server = http.createServer(app);
 app.use(cors());
 app.use(express.json());
 
-console.log()
+const routes = require("./routes")
+app.use("/", routes)
 
 // --- Socket.IO setup ---
 const io = new Server(server, {

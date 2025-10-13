@@ -1,7 +1,10 @@
-import { response } from 'express'
-import data from '../data.json'
+const express = require("express");
+const router = express.Router();
+const data = require("../data.json");
 
+router.get("/users", (req, res) => {
+    console.log('Dados do JSON aqui: ', data)
+    res.json(data)
+})
 
-export async function get() { 
-return response.json(data)     
-}
+module.exports = router

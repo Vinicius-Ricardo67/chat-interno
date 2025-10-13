@@ -3,17 +3,20 @@
     {
         "nome": "davi",
         "email": "email@davi",
-        "senha": 123 
+        "senha": 123 ,
+        "foto": "foto1.png"
     },
     {
         "nome":"vini",
         "email": "email@vini",
-        "senha": 123
+        "senha": 123,
+        "foto": "foto2.png"
     },
     {
         "nome":"vagner",
         "email": "email@vagner",
-        "senha": 123
+        "senha": 123,
+        "foto": "foto3.png"
     }
 ]
 }
