@@ -34,3 +34,19 @@ loginBtn.addEventListener('click', async () => {
     alert(err.message)
   }
 });
+  fetch('http://localhost:3000/cadastrar', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username, senha, email, imagem })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      localStorage.setItem('username', username);
+      window.location.href = 'index.html';
+    } else {
+      alert('Erro: ' + data.message);
+    }
+  })
+  .catch(err => alert('Erro: ' + err.message));
+});
