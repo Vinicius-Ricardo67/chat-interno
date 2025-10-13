@@ -13,7 +13,7 @@ imagemInput.addEventListener('change', () => {
   reader.readAsDataURL(file);
 });
 
-loginBtn.addEventListener('click', () => {
+loginBtn.addEventListener('click', async () => {
   const username = usernameInput.value.trim();
   const senha = senhaInput.value.trim();
   const email = emailInput.value.trim();
@@ -24,6 +24,16 @@ loginBtn.addEventListener('click', () => {
     return;
   }
 
+  try {
+  localStorage.setItem('username', username);
+  localStorage.setItem('email', email);
+  localStorage.setItem('imagem', imagem);
+
+  window.location.href = 'index.html'
+  } catch (err) {
+    alert(err.message)
+  }
+});
   fetch('http://localhost:3000/cadastrar', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

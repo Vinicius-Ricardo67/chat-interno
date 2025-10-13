@@ -21,6 +21,11 @@ const io = new Server(server, {
   },
 });
 
+connectDB();
+
+app.get("/", (req, res) => {
+  res.send("💬 Chat interno rodando...");
+});
 // --- Lista de usuários conectados ---
 let connectedUsers = new Map(); // socket.id -> { nome, email, ip }
 
@@ -35,6 +40,8 @@ io.on("connection", (socket) => {
   const ip = getClientIP(socket);
   console.log(`🟢 Nova conexão: ${socket.id} (${ip})`);
 
+  socket.on("enviarMensagem", async (msg) => {
+    const { remetenteId, destinatarioId, conteudo } = msg;
   // Quando o cliente envia dados do usuário (ex: após login)
   socket.on("user_connected", (userData) => {
     connectedUsers.set(socket.id, { ...userData, ip });
@@ -50,6 +57,7 @@ io.on("connection", (socket) => {
     }
   });
 
+    io.emit("novaMensagem", msg);
   // Mensagem privada
   socket.on("private_message", ({ toSocketId, msg }) => {
     const user = connectedUsers.get(socket.id);

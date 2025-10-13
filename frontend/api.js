@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000/api';
+const API_URL = 'http://localhost:3000';
 
 async function login(username, senha) {
   const res = await fetch(`${API_URL}/login`, {
@@ -8,6 +8,16 @@ async function login(username, senha) {
   });
 
   if (!res.ok) throw new Error('Login falhou');
+  return await res.json();
+}
+
+async function register(nome, email, senha, imagem) {
+  const res = await fetch(`fetch${API_URL}/register`, {
+    method: 'POST',
+    headers: { 'CONTENT-TYPE': 'application/json' },
+    body: JSON.stringify({ nome, email, senha, imagem}),
+  });
+  if (!res.ok) throw new Error('Registro falhou');
   return await res.json();
 }
 
