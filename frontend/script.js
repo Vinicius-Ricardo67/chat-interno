@@ -1,12 +1,10 @@
 const username = localStorage.getItem('username');
-
+const userId = localStorage.getItem('userId');
 if (!username) {
   window.location.href = 'login.html';
-} else {
-  console.log(`Usuário logado: ${username}`);
 }
 
-const socket = io('http://localhost:3000', { query: { username } });
+const socket = io('http://localhost:3000', { query: { userId } });
 
 const usuariosEl = document.getElementById('usuariosOnline');
 const mensagensEl = document.getElementById('chatMensagens');
@@ -24,7 +22,7 @@ function renderizarMensagens() {
   mensagens.forEach(msg => {
     const div = document.createElement('div');
     div.classList.add('msg');
-    div.classList.add(msg.remetente === username ? 'enviada' : 'recebida');
+    div.classList.add(msg.remetenteId == userId ? 'enviada' : 'recebida');
     div.innerHTML = `<p>${msg.conteudo}</p><small>${formatarHora(msg.dataHora)}</small>`;
     mensagensEl.appendChild(div);
   });
@@ -40,33 +38,50 @@ if (destinatarioInput && abrirChatBtn) {
   });
 }
 
-socket.on('usuarios', (usuarios) => {
+socket.on('usuariosOnline', (usuarios) => {
   if (!usuariosEl) return;
   usuariosEl.innerHTML = '';
   usuarios.forEach(u => {
-    if (u !== username) {
+    if (u.id != userId) {
       const li = document.createElement('li');
-      li.textContent = u;
+      li.textContent = u.nome;
       li.onclick = () => selecionarUsuario(u);
       usuariosEl.appendChild(li);
     }
   });
 });
 
-function selecionarUsuario(nome) {
-  usuarioAtual = nome;
-  if (chatHeader) chatHeader.textContent = `Conversando com ${nome}`;
+function selecionarUsuario(usuario) {
+  usuarioAtual = usuario;
+  if (chatHeader) chatHeader.textContent = `Conversando com ${usuario.nome}`;
   mensagens = [];
   renderizarMensagens();
 }
 
 if (abrirChatBtn) {
   abrirChatBtn.addEventListener('click', () => {
-    const nome = destinatarioInput ? destinatarioInput.value.trim() : '';
+    const nome = destinatarioInput.value.trim();
     if (!nome) return alert('Digite o nome do usuário!');
-    selecionarUsuario(nome);
-    if (destinatarioInput) destinatarioInput.value = '';
+    selecionarUsuario({ nome, id: null }); 
+    destinatarioInput.value = '';
   });
+}
+
+function enviarMensagem() {
+  const texto = inputEl.value.trim();
+  if (!texto || !usuarioAtual || !usuarioAtual.id) return;
+
+  const novaMsg = {
+    remetenteId: userId,
+    destinatarioId: usuarioAtual.id,
+    conteudo: texto,
+    dataHora: new Date().toISOString()
+  };
+
+  socket.emit('enviarMensagem', novaMsg);
+  mensagens.push(novaMsg);
+  renderizarMensagens();
+  inputEl.value = '';
 }
 
 if (inputEl) {
@@ -77,32 +92,12 @@ if (inputEl) {
     }
   });
 }
-
 if (btnEnviar) btnEnviar.addEventListener('click', enviarMensagem);
 
-function enviarMensagem() {
-  const texto = inputEl ? inputEl.value.trim() : '';
-  if (!texto || !usuarioAtual) return;
-
-  const novaMsg = {
-    remetente: username,
-    destinatario: usuarioAtual,
-    conteudo: texto,
-    dataHora: new Date().toISOString()
-  };
-
-  socket.emit('mensagem', novaMsg);
-  mensagens.push(novaMsg);
-  renderizarMensagens();
-  if (inputEl) inputEl.value = '';
-}
-
-socket.on('mensagem', (msg) => {
-  if (usuarioAtual && (msg.remetente === usuarioAtual || msg.destinatario === usuarioAtual)) {
+socket.on('novaMensagem', (msg) => {
+  if (usuarioAtual && (msg.remetenteId == usuarioAtual.id || msg.destinatarioId == usuarioAtual.id)) {
     mensagens.push(msg);
     renderizarMensagens();
-  } else {
-    destacarUsuario(msg.remetente);
   }
 });
 
@@ -115,9 +110,7 @@ function destacarUsuario(nome) {
   if (!usuariosEl) return;
   const itens = usuariosEl.querySelectorAll('li');
   itens.forEach(li => {
-    if (li.textContent.includes(nome)) {
-      li.style.fontWeight = 'bold';
-    }
+    if (li.textContent.includes(nome)) li.style.fontWeight = 'bold';
   });
 }
 
@@ -125,14 +118,11 @@ window.onload = function() {
   const username = localStorage.getItem('username');
   const email = localStorage.getItem('email');
   const imagem = localStorage.getItem('imagem');
-
   if (username && email && imagem) {
     document.getElementById('welcomeMessage').innerText = `Bem-vindo, ${username}!`;
-    
     const imgElement = document.getElementById('userImage');
-    imgElement.src = imagem;
+    if(imgElement) imgElement.src = imagem;
   } else {
-    alert('Você não está autenticado!');
     window.location.href = 'login.html';
   }
 };

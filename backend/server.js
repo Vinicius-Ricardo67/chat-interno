@@ -16,19 +16,15 @@ const io = new Server(server, {
   },
 });
 
-// Conexão com o banco
 connectDB();
 
-// Rota simples
 app.get("/", (req, res) => {
   res.send("💬 Chat interno rodando...");
 });
 
-// Socket.io para chat em tempo real
 io.on("connection", (socket) => {
   console.log("🟢 Usuário conectado:", socket.id);
 
-  // Receber mensagem e salvar no banco
   socket.on("enviarMensagem", async (msg) => {
     const { remetenteId, destinatarioId, conteudo } = msg;
 
@@ -37,7 +33,7 @@ io.on("connection", (socket) => {
       VALUES (${remetenteId}, ${destinatarioId}, ${conteudo})
     `;
 
-    io.emit("novaMensagem", msg); // envia para todos
+    io.emit("novaMensagem", msg);
   });
 
   socket.on("disconnect", () => {
