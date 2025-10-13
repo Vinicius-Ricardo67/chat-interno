@@ -49,3 +49,22 @@ loginBtn.addEventListener('click', async () => {
     alert('Erro de conexão com o servidor.');
   }
 });
+<<<<<<< HEAD
+=======
+  fetch('http://localhost:3000/cadastrar', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username, senha, email, imagem })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      localStorage.setItem('username', username);
+      window.location.href = 'index.html';
+    } else {
+      alert('Erro: ' + data.message);
+    }
+  })
+  .catch(err => alert('Erro: ' + err.message));
+});
+>>>>>>> 769b2b97ae960c73f0d9b96dcada0f3849a1318a
