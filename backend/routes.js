@@ -5,6 +5,9 @@ const path = require("path");
 const router = express.Router();
 
 // Caminho do arquivo JSON
+const dataPath = path.join(__dirname, "data.json");
+
+// Carrega os dados
 const dataPath = path.join(__dirname, "../data.json");
 
 // --- Funções auxiliares ---
@@ -13,6 +16,7 @@ function loadData() {
   return JSON.parse(jsonData);
 }
 
+// --- Rotas ---
 function saveData(data) {
   fs.writeFileSync(dataPath, JSON.stringify(data, null, 2), "utf-8");
 }
@@ -35,6 +39,9 @@ router.get("/users/:nome", (req, res) => {
   res.status(404).json({ error: "Usuário não encontrado" });
 });
 
+console.log("teste")
+
+module.exports = router;
 // ✅ Adiciona novo usuário
 router.post("/users", (req, res) => {
   const { nome, email, senha, foto } = req.body;

@@ -66,6 +66,7 @@ io.on("connection", (socket) => {
 
   // Mensagem genérica
   socket.on("enviarMensagem", (msg) => {
+    console.log(":envelope_with_arrow: Nova mensagem recebida:", msg);
     console.log("📩 Nova mensagem recebida:", msg);
     io.emit("novaMensagem", msg);
   });
@@ -81,6 +82,7 @@ io.on("connection", (socket) => {
 
 // --- Endpoint simples (teste de API) ---
 app.get("/", (req, res) => {
+  res.send(":speech_balloon: Chat interno rodando...");
   res.send("💬 Chat interno rodando...");
 });
 
@@ -88,4 +90,5 @@ app.get("/", (req, res) => {
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () =>
   console.log(`🚀 Servidor rodando na porta ${PORT}`)
+);
 );
