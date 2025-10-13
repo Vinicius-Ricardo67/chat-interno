@@ -10,22 +10,18 @@ const server = http.createServer(app);
 app.use(cors());
 app.use(express.json());
 
-const routes = require("./routes")
-app.use("/", routes)
+// --- Importa suas rotas ---
+const routes = require("./routes");
+app.use("/", routes);
 
 // --- Socket.IO setup ---
 const io = new Server(server, {
   cors: {
-    origin: "*", // coloque o domínio do seu front-end aqui em produção
+    origin: "*",
     methods: ["GET", "POST"],
   },
 });
 
-connectDB();
-
-app.get("/", (req, res) => {
-  res.send("💬 Chat interno rodando...");
-});
 // --- Lista de usuários conectados ---
 let connectedUsers = new Map(); // socket.id -> { nome, email, ip }
 
@@ -33,23 +29,22 @@ let connectedUsers = new Map(); // socket.id -> { nome, email, ip }
 function getClientIP(socket) {
   const forwarded = socket.handshake.headers["x-forwarded-for"];
   const ip = forwarded ? forwarded.split(",")[0] : socket.handshake.address;
-  return ip.replace(/^.*:/, ""); // remove "::ffff:" se existir
+  return ip.replace(/^.*:/, ""); // remove "::ffff:"
 }
 
+// --- Conexão Socket.IO ---
 io.on("connection", (socket) => {
   const ip = getClientIP(socket);
   console.log(`🟢 Nova conexão: ${socket.id} (${ip})`);
 
-  socket.on("enviarMensagem", async (msg) => {
-    const { remetenteId, destinatarioId, conteudo } = msg;
   // Quando o cliente envia dados do usuário (ex: após login)
   socket.on("user_connected", (userData) => {
     connectedUsers.set(socket.id, { ...userData, ip });
-    console.log(`Usuário conectado:`, userData);
-    io.emit("users_online", Array.from(connectedUsers.values())); // atualiza lista no frontend
+    console.log(`👤 Usuário conectado:`, userData);
+    io.emit("users_online", Array.from(connectedUsers.values()));
   });
 
-  // Mensagem pública (enviada para todos)
+  // Mensagem pública
   socket.on("chat_message", (msg) => {
     const user = connectedUsers.get(socket.id);
     if (user) {
@@ -57,13 +52,22 @@ io.on("connection", (socket) => {
     }
   });
 
-    io.emit("novaMensagem", msg);
   // Mensagem privada
   socket.on("private_message", ({ toSocketId, msg }) => {
     const user = connectedUsers.get(socket.id);
     if (user && io.sockets.sockets.get(toSocketId)) {
-      io.to(toSocketId).emit("private_message", { from: user, msg, time: new Date() });
+      io.to(toSocketId).emit("private_message", {
+        from: user,
+        msg,
+        time: new Date(),
+      });
     }
+  });
+
+  // Mensagem genérica
+  socket.on("enviarMensagem", (msg) => {
+    console.log(":envelope_with_arrow: Nova mensagem recebida:", msg);
+    io.emit("novaMensagem", msg);
   });
 
   // Desconexão
@@ -77,9 +81,11 @@ io.on("connection", (socket) => {
 
 // --- Endpoint simples (teste de API) ---
 app.get("/", (req, res) => {
-  res.send("Servidor do chat está rodando ✅");
+  res.send(":speech_balloon: Chat interno rodando...");
 });
 
 // --- Inicia o servidor ---
 const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => console.log(`🚀 Servidor rodando na porta ${PORT}`));
+server.listen(PORT, () =>
+  console.log(`🚀 Servidor rodando na porta ${PORT}`)
+);

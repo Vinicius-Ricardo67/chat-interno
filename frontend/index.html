@@ -1,17 +1,24 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Chat</title>
-  <link rel="stylesheet" href="/frontend/style.css" />
+  <title>Chat Interno</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div id="welcomeMessage"></div>
+  <img id="userImage" src="" alt="Foto do usuário">
+
+  <div class="user-select">
+    <input type="text" id="destinatarioInput" placeholder="Digite o nome do usuário">
+    <button id="abrirChatBtn">Abrir chat</button>
+  </div>
+
+  <div id="chatMensagens" class="mensagens"></div>
+
   <div class="chat-container">
     <aside class="user-list">
-      <div class="user-info">
-        <img id="userImage" class="user-avatar" alt="Usuário" />
-        <p id="welcomeMessage"></p>
-      </div>
+      <h3>Usuários Online</h3>
       <ul id="usuariosOnline"></ul>
     </aside>
 
@@ -19,7 +26,7 @@
       <div id="chatHeader">Selecione um usuário</div>
       <div id="chatMensagens" class="mensagens"></div>
       <div class="chat-input">
-        <input type="text" id="mensagemInput" placeholder="Digite uma mensagem..." />
+        <input type="text" id="mensagemInput" placeholder="Digite uma mensagem...">
         <button id="enviarBtn">Enviar</button>
       </div>
     </main>

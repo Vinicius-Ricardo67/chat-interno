@@ -1,4 +1,5 @@
 const username = localStorage.getItem('username');
+
 if (!username) {
   window.location.href = 'login.html';
 }
@@ -16,29 +17,6 @@ const abrirChatBtn = document.getElementById('abrirChatBtn');
 let usuarioAtual = null;
 let mensagens = [];
 
-async function carregarUsuarios() {
-  const res = await fetch('http://localhost:3000/usuarios');
-  const usuarios = await res.json();
-  usuariosEl.innerHTML = '';
-
-  usuarios.forEach(u => {
-    if (u.username !== username) {
-      const li = document.createElement('li');
-      li.textContent = u.username;
-      li.onclick = () => selecionarUsuario(u.username);
-      usuariosEl.appendChild(li);
-    }
-  });
-}
-carregarUsuarios();
-
-function selecionarUsuario(nome) {
-  usuarioAtual = nome;
-  chatHeader.textContent = `Conversando com ${nome}`;
-  mensagens = [];
-  renderizarMensagens();
-}
-
 function renderizarMensagens() {
   mensagensEl.innerHTML = '';
   mensagens.forEach(msg => {
@@ -51,25 +29,22 @@ function renderizarMensagens() {
   mensagensEl.scrollTop = mensagensEl.scrollHeight;
 }
 
+destinatarioInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') abrirChatBtn.click();
+});
+
 abrirChatBtn.addEventListener('click', () => {
   const nome = destinatarioInput.value.trim();
   if (!nome) return alert('Digite o nome do usuário!');
-  selecionarUsuario(nome);
+  usuarioAtual = nome;
+  chatHeader.textContent = `Conversando com ${nome}`;
+  mensagens = [];
+  renderizarMensagens();
   destinatarioInput.value = '';
 });
 
-destinatarioInput.addEventListener('keydown', e => {
-  if (e.key === 'Enter') {
-    e.preventDefault();
-    abrirChatBtn.click();
-  }
-});
-
-inputEl.addEventListener('keydown', e => {
-  if (e.key === 'Enter') {
-    e.preventDefault();
-    enviarMensagem();
-  }
+inputEl.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') enviarMensagem();
 });
 
 btnEnviar.addEventListener('click', enviarMensagem);
@@ -91,23 +66,18 @@ function enviarMensagem() {
   inputEl.value = '';
 }
 
-socket.on('mensagem', msg => {
-  if (usuarioAtual && (msg.remetente === usuarioAtual || msg.destinatario === usuarioAtual)) {
-    mensagens.push(msg);
-    renderizarMensagens();
-  } else {
-    destacarUsuario(msg.remetente);
-  }
-});
-
 function formatarHora(iso) {
   const d = new Date(iso);
   return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
 }
 
-function destacarUsuario(nome) {
-  const itens = usuariosEl.querySelectorAll('li');
-  itens.forEach(li => {
-    if (li.textContent.includes(nome)) li.style.fontWeight = 'bold';
-  });
-}
+window.onload = function() {
+  const email = localStorage.getItem('email');
+  const imagem = localStorage.getItem('imagem');
+  if (username && email && imagem) {
+    document.getElementById('welcomeMessage').innerText = `Bem-vindo, ${username}!`;
+    document.getElementById('userImage').src = imagem;
+  } else {
+    window.location.href = 'login.html';
+  }
+};
