@@ -1,15 +1,16 @@
 const usernameInput = document.getElementById('username');
 const senhaInput = document.getElementById('senha');
 const emailInput = document.getElementById('email');
-const loginBtn = document.getElementById('loginBtn');
 const imagemInput = document.getElementById('imagem');
 const previewImg = document.getElementById('previewImg');
+const loginBtn = document.getElementById('loginBtn');
 
 imagemInput.addEventListener('change', () => {
   const file = imagemInput.files[0];
   if (!file) return;
+
   const reader = new FileReader();
-  reader.onload = (e) => previewImg.src = e.target.result;
+  reader.onload = e => previewImg.src = e.target.result;
   reader.readAsDataURL(file);
 });
 
@@ -17,7 +18,7 @@ loginBtn.addEventListener('click', async () => {
   const username = usernameInput.value.trim();
   const senha = senhaInput.value.trim();
   const email = emailInput.value.trim();
-  const imagem = previewImg.src;
+  const imagem = previewImg.src || 'default.png';
 
   if (!username || !senha || !email) {
     alert('Preencha todos os campos obrigatórios!');
@@ -25,12 +26,26 @@ loginBtn.addEventListener('click', async () => {
   }
 
   try {
-  localStorage.setItem('username', username);
-  localStorage.setItem('email', email);
-  localStorage.setItem('imagem', imagem);
+    const res = await fetch('http://localhost:3000/usuarios', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, senha, email, imagem })
+    });
 
-  window.location.href = 'index.html'
+    const data = await res.json();
+
+    if (res.ok) {
+      // Salva os dados no localStorage
+      localStorage.setItem('username', data.username);
+      localStorage.setItem('email', data.email);
+      localStorage.setItem('imagem', data.imagem);
+
+      window.location.href = 'index.html';
+    } else {
+      alert(data.erro || 'Erro ao registrar usuário.');
+    }
   } catch (err) {
-    alert(err.message)
+    console.error('Erro no cadastro/login:', err);
+    alert('Erro de conexão com o servidor.');
   }
 });
