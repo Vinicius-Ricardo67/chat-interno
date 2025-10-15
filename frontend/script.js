@@ -1,5 +1,3 @@
-const { query } = require("mssql");
-
 const usuario = JSON.parse(localStorage.getItem('usuario'));
 
 if (!usuario || !usuario.username) {
@@ -10,7 +8,7 @@ const username = usuario.username;
 const email = usuario.email;
 const imagem = usuario.imagem;
 
-const socket = io('http://localhost:3000', { query: { username } });
+ const socket = io('http://localhost:3000', { query: { username } });
 
 const usuariosEl = document.getElementById('usuarios');
 const mensagensEl = document.getElementById('mensagens');

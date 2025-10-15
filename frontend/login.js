@@ -1,10 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const usernameInput = document.getElementById('username');
-  const senhaInput = document.getElementById('senha');
-  const emailInput = document.getElementById('email');
   const imagemInput = document.getElementById('imagem');
   const previewImg = document.getElementById('previewImg');
-  const loginBtn = document.getElementById('loginBtn');
 
   imagemInput.addEventListener('change', () => {
     const file = imagemInput.files[0];
@@ -14,13 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
       reader.readAsDataURL(file);
     }
   });
+  });
 
   loginBtn.addEventListener('click', () => {
-    const username = usernameInput.value.trim();
-    const senha = senhaInput.value.trim();
-    const email = emailInput.value.trim();
-    const imagem = previewImg.src;
-  const { username, senha, email, imagem } = req.body;
 const usernameInput = document.getElementById('username');
 const senhaInput = document.getElementById('senha');
 const emailInput = document.getElementById('email');
@@ -56,4 +48,4 @@ loginBtn.addEventListener('click', () => {
     alert('Login salvo!');
     window.location.href = 'index.html';
   });
-
+ });
