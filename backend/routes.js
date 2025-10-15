@@ -4,9 +4,6 @@ const path = require("path");
 
 const router = express.Router();
 
-// Caminho do arquivo JSON
-const dataPath = path.join(__dirname, "data.json");
-
 // Carrega os dados
 const dataPath = path.join(__dirname, "../data.json");
 

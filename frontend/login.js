@@ -15,14 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-<<<<<<< HEAD
   loginBtn.addEventListener('click', () => {
     const username = usernameInput.value.trim();
     const senha = senhaInput.value.trim();
     const email = emailInput.value.trim();
     const imagem = previewImg.src;
-=======
-app.post('/usuarios', (req, res) => {
   const { username, senha, email, imagem } = req.body;
 const usernameInput = document.getElementById('username');
 const senhaInput = document.getElementById('senha');
@@ -44,14 +41,12 @@ loginBtn.addEventListener('click', () => {
   const senha = senhaInput.value.trim();
   const email = emailInput.value.trim();
   const imagem = previewImg.src || 'default.png';
->>>>>>> 55e7d327e9b1029ef6e61aacfda511c2273cfa3f
 
     if (!username || !senha || !email) {
       alert('Preencha todos os campos.');
       return;
     }
 
-<<<<<<< HEAD
     const usuario = { username, senha, email, imagem };
     localStorage.setItem('usuario', JSON.stringify(usuario));
     localStorage.setItem('username', username);
@@ -61,29 +56,4 @@ loginBtn.addEventListener('click', () => {
     alert('Login salvo!');
     window.location.href = 'index.html';
   });
-=======
-  let data = { usuarios: [] };
-  if (fs.existsSync(dataPath)) {
-    const fileContent = fs.readFileSync(dataPath, 'utf-8');
-    data = JSON.parse(fileContent); // ⚠⚠ davi é gay!!
-  }
 
-  const existe = data.usuarios.find(u => u.username === username || u.email === email);
-  if (existe) {
-    return res.status(400).json({ erro: 'Usuário ou email já cadastrado.' });
-  }
-
-  const novoUsuario = { username, senha, email, imagem };
-  data.usuarios.push(novoUsuario);
-
-  fs.writeFileSync(dataPath, JSON.stringify(data, null, 2));
-
-  return res.status(201).json(novoUsuario);
-  // Salva os dados no localStorage
-  localStorage.setItem('username', username);
-  localStorage.setItem('email', email);
-  localStorage.setItem('imagem', imagem);
-
-  window.location.href = 'index.html';
->>>>>>> 55e7d327e9b1029ef6e61aacfda511c2273cfa3f
-});
