@@ -124,6 +124,7 @@ button {
 }
 
 button:hover {
+<<<<<<< HEAD
   background: linear-gradient(90deg, #1d4ed8, #2563eb);
   transform: translateY(-2px);
   box-shadow: 0 0 20px rgba(37, 99, 235, 0.7);
@@ -159,3 +160,7 @@ button:active {
     height: 90px;
   }
 }
+=======
+  background: #1d4ed8;
+}
+>>>>>>> 55e7d327e9b1029ef6e61aacfda511c2273cfa3f

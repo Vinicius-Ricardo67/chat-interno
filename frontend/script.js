@@ -36,6 +36,7 @@ destinatarioInput.addEventListener('keydown', (e) => {
 abrirChatBtn.addEventListener('click', () => {
   const nome = destinatarioInput.value.trim();
   if (!nome) return alert('Digite o nome do usuário!');
+  if (!nome) return alert('Digite o nome do usuÃ¡rio!');
   usuarioAtual = nome;
   chatHeader.textContent = `Conversando com ${nome}`;
   mensagens = [];
