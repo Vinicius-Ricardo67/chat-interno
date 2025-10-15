@@ -3,7 +3,7 @@ const path = require('path');
 
 const dataPath = path.join(__dirname, 'data.json');
 
-app.post('/usuarios', (req, res) => {
+app.post('/usuarios', (req, res) => { 
   const { username, senha, email, imagem } = req.body;
 const usernameInput = document.getElementById('username');
 const senhaInput = document.getElementById('senha');
@@ -33,7 +33,7 @@ loginBtn.addEventListener('click', () => {
   let data = { usuarios: [] };
   if (fs.existsSync(dataPath)) {
     const fileContent = fs.readFileSync(dataPath, 'utf-8');
-    data = JSON.parse(fileContent); // ⚠⚠ davi é gay!!
+    data = JSON.parse(fileContent); 
   }
 
   const existe = data.usuarios.find(u => u.username === username || u.email === email);
@@ -53,4 +53,5 @@ loginBtn.addEventListener('click', () => {
   localStorage.setItem('imagem', imagem);
 
   window.location.href = 'index.html';
-});
+});   
+});   
