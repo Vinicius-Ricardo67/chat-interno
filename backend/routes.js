@@ -36,7 +36,6 @@ router.get("/users/:nome", (req, res) => {
   res.status(404).json({ error: "Usuário não encontrado" });
 });
 
-console.log("teste")
 
 module.exports = router;
 // ✅ Adiciona novo usuário
