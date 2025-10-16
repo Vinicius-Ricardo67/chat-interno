@@ -18,10 +18,11 @@
         "senha": 123,
         "foto": "https://avatars.fastly.steamstatic.com/42df7f7775ef2f7542fc2bff40744af690546b77_full.jpg"
     },
-    {"nome":"otavio/bulika",
-    "email":"otavio@gmailcom",
-    "senha":123,
-    "foto":"https://avatars.fastly.steamstatic.com/b78735d69dadbb161f59b4fa69ed4d89d3135ffe_full.jpg"
+    {
+        "nome":"otavio/bulika",
+        "email":"otavio@gmailcom",
+        "senha":123,
+        "foto":"https://avatars.fastly.steamstatic.com/b78735d69dadbb161f59b4fa69ed4d89d3135ffe_full.jpg"
     }
 ]
 }

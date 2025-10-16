@@ -3,35 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <title>Chat Interno</title>
-  <link rel="stylesheet" href="/frontend/style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="welcomeMessage"></div>
-  <img id="userImage" src="" alt="Foto do usuário">
-
-  <div class="user-select">
-    <input type="text" id="destinatarioInput" placeholder="Digite o nome do usuário">
-    <button id="abrirChatBtn">Abrir chat</button>
-  </div>
-
-  <div id="chatMensagens" class="mensagens"></div>
-
   <div class="chat-container">
-    <aside class="user-list">
-      <h3>Usuários Online</h3>
+    <aside class="sidebar">
+      <h2>Usuários Online</h2>
       <ul id="usuariosOnline"></ul>
+      <div class="novo-chat">
+        <input type="text" id="destinatarioInput" placeholder="Nome do usuário">
+        <button id="abrirChatBtn">Abrir Chat</button>
+      </div>
     </aside>
 
-    <main class="chat">
-      <div id="chatHeader">Selecione um usuário</div>
-      <div id="chatMensagens" class="mensagens"></div>
+    <main class="chat-main">
+      <header id="chatHeader">Selecione um usuário para conversar</header>
+      <div id="chatMensagens" class="chat-mensagens"></div>
       <div class="chat-input">
-        <input type="text" id="mensagemInput" placeholder="Digite uma mensagem...">
+        <input type="text" id="mensagemInput" placeholder="Digite sua mensagem...">
         <button id="enviarBtn">Enviar</button>
       </div>
     </main>
   </div>
-
   <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
   <script src="script.js"></script>
 </body>
